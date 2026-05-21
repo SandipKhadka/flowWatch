@@ -10,3 +10,7 @@ plotly
 scapy
 pyyaml
 fpdf2
+wordcloud
+psutil
+openpyxl
+weasyprint

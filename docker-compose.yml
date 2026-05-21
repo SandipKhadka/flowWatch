@@ -1,0 +1,19 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  ids:
+    build: .
+    container_name: securenet-ids
+    network_mode: host
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./reports:/app/reports
+      - ./models:/app/src/models
+    restart: unless-stopped
+    environment:
+      - STREAMLIT_SERVER_PORT=8501
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW

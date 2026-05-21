@@ -1,0 +1,29 @@
+{
+    "email": {
+        "enabled": false,
+        "smtp_server": "smtp.gmail.com",
+        "smtp_port": 587,
+        "sender_email": "",
+        "sender_password": "",
+        "recipient_emails": []
+    },
+    "webhook": {
+        "enabled": false,
+        "urls": [],
+        "headers": {}
+    },
+    "slack": {
+        "enabled": false,
+        "webhook_url": ""
+    },
+    "thresholds": {
+        "min_severity": 5,
+        "cooldown_seconds": 60,
+        "batch_size": 10
+    },
+    "logging": {
+        "file_enabled": true,
+        "console_enabled": true,
+        "log_file": "logs/alerts.log"
+    }
+}
