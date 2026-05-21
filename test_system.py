@@ -152,7 +152,7 @@ def test_performance():
 
 def run_full_test():
     print("\n" + "█"*70)
-    print("  🚀 SECURENET AI - COMPLETE SYSTEM VERIFICATION")
+    print("  🚀 flowwatch AI - COMPLETE SYSTEM VERIFICATION")
     print("█"*70)
     
     tests = [

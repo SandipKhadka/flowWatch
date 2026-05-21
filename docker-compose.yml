@@ -4,7 +4,7 @@ version: '3.8'
 services:
   ids:
     build: .
-    container_name: securenet-ids
+    container_name: flowwatch-ids
     network_mode: host
     volumes:
       - ./data:/app/data

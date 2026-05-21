@@ -124,7 +124,7 @@ class AlertManager:
             msg['Subject'] = f"SECURITY ALERT: {alert['attack_type'].upper()} Detected"
             
             body = f"""
-            Security Alert from SecureNet AI
+            Security Alert from FlowWatch AI
             
             Attack Type: {alert['attack_type'].upper()}
             Source IP: {alert.get('source_ip', 'Unknown')}
@@ -183,7 +183,7 @@ class AlertManager:
                             {"title": "Confidence", "value": f"{alert['confidence']*100:.1f}%", "short": True},
                             {"title": "Time", "value": alert['timestamp'], "short": False}
                         ],
-                        "footer": "SecureNet AI IDS",
+                        "footer": "FlowWatch AI IDS",
                         "ts": int(datetime.now().timestamp())
                     }
                 ]

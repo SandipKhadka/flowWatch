@@ -1,7 +1,7 @@
 # main.py - Entry point for the application
 #!/usr/bin/env python3
 """
-SecureNet AI - Advanced Intrusion Detection System
+FlowWatch AI - Advanced Intrusion Detection System
 Final Year Project 2026
 
 This is the main entry point for the application.
@@ -99,7 +99,7 @@ def check_database():
 
 def start_streamlit(port=8501, host='localhost'):
     """Start Streamlit application"""
-    print(f"\n🚀 Starting SecureNet AI IDS...")
+    print(f"\n🚀 Starting FlowWatch AI IDS...")
     print(f"📍 URL: http://{host}:{port}")
     print(f"📅 Started at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("="*50)
@@ -121,7 +121,7 @@ def start_streamlit(port=8501, host='localhost'):
 
 def start_api_only(port=5000):
     """Start only the API server"""
-    print(f"\n🚀 Starting SecureNet AI API Server...")
+    print(f"\n🚀 Starting FlowWatch AI API Server...")
     print(f"📍 API URL: http://localhost:{port}")
     
     try:
@@ -146,7 +146,7 @@ def start_api_only(port=5000):
 
 def run_demo():
     """Run demo mode without web interface"""
-    print("\n🎮 Running SecureNet AI in Demo Mode...")
+    print("\n🎮 Running FlowWatch AI in Demo Mode...")
     
     try:
         from src.detection.demo_mode import DemoModeIDS
@@ -175,7 +175,7 @@ def run_demo():
 def main():
     """Main entry point"""
     parser = argparse.ArgumentParser(
-        description='SecureNet AI - Advanced Intrusion Detection System',
+        description='FlowWatch AI - Advanced Intrusion Detection System',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:

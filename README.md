@@ -1,4 +1,4 @@
-# 🚨 SecureNet AI - Intrusion Detection System
+# 🚨 FlowWatch AI - Intrusion Detection System
 
 **AI-Powered Hybrid Network Intrusion Detection System**  
 **Final Year Information Technology Project 2026**
@@ -7,7 +7,7 @@
 
 ## 📋 Project Overview
 
-**SecureNet AI** is a sophisticated **Intrusion Detection System (IDS)** that combines traditional rule-based detection with modern Machine Learning techniques to detect both known and unknown network attacks in real-time.
+**FlowWatch AI** is a sophisticated **Intrusion Detection System (IDS)** that combines traditional rule-based detection with modern Machine Learning techniques to detect both known and unknown network attacks in real-time.
 
 This project was designed to simulate **3 developers working for 3 months**, demonstrating proficiency in Cybersecurity, Machine Learning, Software Engineering, and System Integration.
 

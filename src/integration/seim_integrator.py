@@ -12,7 +12,7 @@ class SIEMIntegrator:
         """Forward alert to Splunk HEC"""
         splunk_data = {
             "time": datetime.now().timestamp(),
-            "host": "securenet-ids",
+            "host": "flowwatch-ids",
             "source": "ids_detector",
             "sourcetype": "security",
             "event": {
@@ -38,7 +38,7 @@ class SIEMIntegrator:
         """Forward alert to Elasticsearch"""
         es_data = {
             "@timestamp": datetime.now().isoformat(),
-            "ids": "securenet-ai",
+            "ids": "flowwatch-ai",
             "threat": alert
         }
         
@@ -59,7 +59,7 @@ class SIEMIntegrator:
         
         export_data = {
             "export_time": datetime.now().isoformat(),
-            "source": "SecureNet AI IDS",
+            "source": "FlowWatch AI IDS",
             "version": "1.0",
             "alerts": alerts
         }

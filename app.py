@@ -29,7 +29,7 @@ except ImportError:
 
 # Page config
 st.set_page_config(
-    page_title="SecureNet AI - Intrusion Detection System",
+    page_title="FlowWatch AI - Intrusion Detection System",
     page_icon="🛡️",
     layout="wide"
 )
@@ -133,7 +133,7 @@ if not st.session_state.historical_loaded and st.session_state.db:
 # Header
 st.markdown("""
 <div class="header">
-    <h1>🛡️ SecureNet AI</h1>
+    <h1>🛡️ FlowWatch AI</h1>
     <p>Advanced Hybrid Intrusion Detection System | Final Year Project 2026</p>
     <p style="font-size: 0.9rem; margin-top: 0.5rem;">Powered by XGBoost & Random Forest | Persistent Storage</p>
 </div>
@@ -770,7 +770,7 @@ if st.session_state.running:
 st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: gray; padding: 1rem;">
-    <p>🛡️ SecureNet AI - Advanced Hybrid Intrusion Detection System</p>
+    <p>🛡️ FlowWatch AI - Advanced Hybrid Intrusion Detection System</p>
     <p>Powered by XGBoost | Real-time Monitoring | MITRE ATT&CK | Persistent Storage | PDF Export</p>
     <p style="font-size: 0.8rem;">Final Year Project 2026 | Department of Information Technology</p>
 </div>

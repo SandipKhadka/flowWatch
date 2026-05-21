@@ -24,7 +24,7 @@ class PDFExporter:
         
         # Title
         pdf.set_font("Arial", "B", 16)
-        pdf.cell(0, 10, "SecureNet AI - Security Report", ln=True, align="C")
+        pdf.cell(0, 10, "FlowWatch AI - Security Report", ln=True, align="C")
         pdf.set_font("Arial", "", 10)
         pdf.cell(0, 8, f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", ln=True, align="C")
         pdf.cell(0, 8, f"Total Records: {len(alerts_df)}", ln=True, align="C")
@@ -81,7 +81,7 @@ class PDFExporter:
         # Footer
         pdf.set_y(-20)
         pdf.set_font("Arial", "I", 8)
-        pdf.cell(0, 10, "SecureNet AI - Advanced Intrusion Detection System", ln=True, align="C")
+        pdf.cell(0, 10, "FlowWatch AI - Advanced Intrusion Detection System", ln=True, align="C")
         
         # Save PDF
         pdf.output(filename)
@@ -99,7 +99,7 @@ class PDFExporter:
         
         # Title
         pdf.set_font("Arial", "B", 16)
-        pdf.cell(0, 10, "SecureNet AI - Filtered Security Report", ln=True, align="C")
+        pdf.cell(0, 10, "FlowWatch AI - Filtered Security Report", ln=True, align="C")
         pdf.ln(5)
         
         # Filters applied

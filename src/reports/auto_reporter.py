@@ -11,7 +11,7 @@ class AutoReportGenerator:
         <!DOCTYPE html>
         <html>
         <head>
-            <title>SecureNet AI - Security Report</title>
+            <title>FlowWatch AI - Security Report</title>
             <style>
                 body { font-family: Arial, sans-serif; margin: 40px; }
                 .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
@@ -28,7 +28,7 @@ class AutoReportGenerator:
         </head>
         <body>
             <div class="header">
-                <h1>🛡️ SecureNet AI Security Report</h1>
+                <h1>🛡️ FlowWatch AI Security Report</h1>
                 <p>Generated: {{ date }}</p>
                 <p>Analysis Period: {{ period }}</p>
             </div>
@@ -72,7 +72,7 @@ class AutoReportGenerator:
             </div>
             
             <div style="margin-top: 40px; text-align: center; color: #666;">
-                <p>SecureNet AI - Advanced Intrusion Detection System</p>
+                <p>FlowWatch AI - Advanced Intrusion Detection System</p>
                 <p>This report is automatically generated and timestamped for audit purposes</p>
             </div>
         </body>
