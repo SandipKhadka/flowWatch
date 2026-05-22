@@ -1,0 +1,20 @@
+{
+  "training_date": "2026-05-22 02:06:05",
+  "dataset": "UNSW-NB15",
+  "total_samples": 2059415,
+  "balanced_samples": 149643,
+  "n_features": 45,
+  "binary_accuracy": 0.9878970484336571,
+  "multi_accuracy": 0.8693574793678372,
+  "model_params": {
+    "n_estimators": 100,
+    "max_depth": 20,
+    "class_weight": {
+      "0": 0.5254219558647751,
+      "1": 10.334019118348094
+    },
+    "random_state": 42,
+    "n_jobs": -1,
+    "verbose": 1
+  }
+}
