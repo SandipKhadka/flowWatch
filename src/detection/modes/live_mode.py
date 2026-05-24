@@ -2,7 +2,6 @@
 
 from .base_mode import DetectionMode
 from ..filters.ip_filter import IPFilter
-import os
 
 
 class LiveMode(DetectionMode):
