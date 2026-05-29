@@ -36,6 +36,10 @@ class AnalyticsPage:
         # Time range selector
         df = self._render_time_range_selector(df)
         
+        if df.empty:
+            st.warning("No data available for selected time range")
+            return
+        
         # Key metrics
         self._render_key_metrics(df)
         
@@ -175,7 +179,7 @@ class AnalyticsPage:
             
             fig = go.Figure(data=[
                 go.Bar(
-                    x=severity_counts.index,
+                    x=severity_counts.index.astype(str),
                     y=severity_counts.values,
                     marker_color=['#10b981', '#f59e0b', '#f97316', '#ef4444'],
                     text=severity_counts.values,
@@ -276,21 +280,25 @@ class AnalyticsPage:
         threat_counts = df_sorted.resample(period_map[resample_period]).size()
         
         if len(threat_counts) > 1:
+            # Create DataFrame for plotting
+            timeline_df = pd.DataFrame({
+                'Time': threat_counts.index,
+                'Threats': threat_counts.values
+            })
+            
             # Line chart
-            fig = go.Figure()
-            fig.add_trace(go.Scatter(
-                x=threat_counts.index,
-                y=threat_counts.values,
-                mode='lines+markers',
-                name='Threats',
-                line=dict(color='#ef4444', width=2),
-                marker=dict(size=6, color='#dc2626')
-            ))
-            fig.update_layout(
+            fig = px.line(
+                timeline_df,
+                x='Time',
+                y='Threats',
                 title=f"Threat Frequency ({resample_period} Intervals)",
+                markers=True
+            )
+            fig.update_traces(line=dict(color='#ef4444', width=2), marker=dict(size=6, color='#dc2626'))
+            fig.update_layout(
+                height=400,
                 xaxis_title="Time",
                 yaxis_title="Number of Threats",
-                height=400,
                 hovermode='x unified'
             )
             st.plotly_chart(fig, use_container_width=True)
@@ -321,31 +329,35 @@ class AnalyticsPage:
                 title="Detection Confidence",
                 color_discrete_sequence=['#10b981']
             )
-            fig.update_layout(height=300)
+            fig.update_layout(height=300, xaxis_title="Confidence", yaxis_title="Frequency")
             st.plotly_chart(fig, use_container_width=True)
         
         with col2:
             # Hourly attack patterns
             st.markdown("##### Hourly Attack Patterns")
             df['hour'] = df['timestamp'].dt.hour
-            hourly_counts = df.groupby('hour').size()
+            hourly_counts = df.groupby('hour').size().reset_index()
+            hourly_counts.columns = ['Hour', 'Count']
             
-            fig = px.line(
-                x=hourly_counts.index, y=hourly_counts.values,
-                title="Attacks by Hour",
-                markers=True
-            )
-            fig.update_layout(
-                xaxis_title="Hour of Day (0-23)",
-                yaxis_title="Number of Attacks",
-                height=300
-            )
-            fig.update_traces(line=dict(color='#f59e0b', width=2))
-            st.plotly_chart(fig, use_container_width=True)
+            if len(hourly_counts) > 0:
+                fig = px.line(
+                    hourly_counts,
+                    x='Hour',
+                    y='Count',
+                    title="Attacks by Hour",
+                    markers=True
+                )
+                fig.update_layout(
+                    xaxis_title="Hour of Day (0-23)",
+                    yaxis_title="Number of Attacks",
+                    height=300
+                )
+                fig.update_traces(line=dict(color='#f59e0b', width=2))
+                st.plotly_chart(fig, use_container_width=True)
         
         # Risk trend
         st.markdown("##### Risk Score Trend")
-        df_sorted = df.sort_values('timestamp')
+        df_sorted = df.sort_values('timestamp').copy()
         df_sorted['risk_score'] = df_sorted['attack_type'].apply(
             lambda x: self.attack_mapper.get_severity_score(x)
         )
@@ -390,16 +402,18 @@ class AnalyticsPage:
             # Create correlation matrix
             correlation = df.groupby('attack_type').size().sort_values(ascending=False)
             
-            fig = px.bar(
-                x=correlation.values,
-                y=correlation.index,
-                orientation='h',
-                title="Attack Frequency Ranking",
-                color=correlation.values,
-                color_continuous_scale='RdBu'
-            )
-            fig.update_layout(height=300)
-            st.plotly_chart(fig, use_container_width=True)
+            if len(correlation) > 0:
+                fig = px.bar(
+                    x=correlation.values,
+                    y=correlation.index,
+                    orientation='h',
+                    title="Attack Frequency Ranking",
+                    color=correlation.values,
+                    color_continuous_scale='RdBu',
+                    labels={'x': 'Number of Attacks', 'y': 'Attack Type'}
+                )
+                fig.update_layout(height=300)
+                st.plotly_chart(fig, use_container_width=True)
         
         with col2:
             # Protocol distribution
@@ -407,21 +421,22 @@ class AnalyticsPage:
             if 'protocol' in df.columns:
                 protocol_counts = df['protocol'].value_counts()
                 
-                fig = px.pie(
-                    values=protocol_counts.values,
-                    names=protocol_counts.index,
-                    title="Attack Protocols",
-                    color_discrete_sequence=px.colors.qualitative.Set3
-                )
-                fig.update_layout(height=300)
-                st.plotly_chart(fig, use_container_width=True)
+                if len(protocol_counts) > 0:
+                    fig = px.pie(
+                        values=protocol_counts.values,
+                        names=protocol_counts.index,
+                        title="Attack Protocols",
+                        color_discrete_sequence=px.colors.qualitative.Set3
+                    )
+                    fig.update_layout(height=300)
+                    st.plotly_chart(fig, use_container_width=True)
             else:
                 st.info("Protocol data not available")
         
         # Attack bursts detection
         st.markdown("##### 🚨 Attack Burst Detection")
         
-        df_sorted = df.sort_values('timestamp')
+        df_sorted = df.sort_values('timestamp').copy()
         df_sorted['time_diff'] = df_sorted['timestamp'].diff().dt.total_seconds()
         
         # Detect bursts (3+ attacks within 60 seconds)
